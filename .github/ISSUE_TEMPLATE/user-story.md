@@ -2,7 +2,7 @@
 name: User Story
 about: Suggest an idea for this project
 title: ''
-labels: research, user-story
+labels: needs-research, user-story
 assignees: ''
 
 ---
