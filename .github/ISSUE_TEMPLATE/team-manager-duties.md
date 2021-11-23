@@ -16,7 +16,7 @@ assignees: ''
 
 ## Wednesday
 
-- [ ] Confirm collaboration time agenda per the Slack thread or cancel collaboration time (Wednesday)
+- [ ] Confirm collaboration time agenda per the Slack thread or cancel collaboration time
 
 ## Thursday
 
