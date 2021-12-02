@@ -33,4 +33,4 @@ runs:
 
     - name: "Verify response working"
       shell: bash
-      run: curl http://localhost:8080 -I
+      run: curl http://localhost:3000 -I

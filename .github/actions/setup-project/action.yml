@@ -33,4 +33,4 @@ runs:
         RAILS_ENV: ${{ inputs.rails_env }}
         DATABASE_URL: ${{ inputs.database_url }}
       shell: bash
-      run: bundle exec rake db:setup
+      run: bundle exec rake db:schema:load
