@@ -16,9 +16,9 @@ jobs:
           --health-retries 5
         ports: ["5432:5432"]
         env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USERNAME: pangolin
           POSTGRES_DB: pangolin_test
+          POSTGRES_USER: pangolin
+          POSTGRES_PASSWORD: postgres
 
     steps:
       - uses: actions/checkout@v2
