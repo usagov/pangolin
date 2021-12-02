@@ -13,6 +13,8 @@ assignees: ''
 **With** [resources]
 **To discover** [information]
   
+*What is an exploratory charter? [Read more here](https://medium.com/product-labs/charters-exploratory-testing-and-beyond-87315184f256).*
+  
 ### Intended approach (optional):
 - [ ] <TK>
 
