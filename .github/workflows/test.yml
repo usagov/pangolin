@@ -1,0 +1,62 @@
+name: Test
+on: [push]
+  # pull_request:
+  #   branches: [ master ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+    - run: ruby -v
+    
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.18.x'
+        registry-url: 'https://registry.npmjs.org'
+    
+    - name: Cache Gems
+      uses: actions/cache@v1.1.2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: ${{ runner.os }}-gems-
+
+    - name: Install and configure bundler
+      run: |
+        gem install bundler
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+
+    - name: Yarn cache
+      id: cache-yarn
+      uses: actions/cache@v1
+      with:
+        path: ${{ steps.yarn-cache-dir.outputs.dir }}
+        key: yarn-${{ hashFiles('**/yarn.lock') }}
+
+    - name: Yarn install
+      run: yarn install
+
+    - name: Setup test DB
+      run: |
+        bundle exec rake db:setup
+      env:
+        RAILS_ENV: test
+
+    - name: Run Rspec
+      run: bundle exec rspec
