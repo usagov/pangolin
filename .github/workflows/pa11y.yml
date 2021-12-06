@@ -25,6 +25,8 @@ jobs:
 
       - uses: ./.github/actions/setup-project
 
+      - uses: ./.github/actions/setup-database
+
       - uses: ./.github/actions/run-server
 
       # this is needed again because run-server removes devDependencies during asset compilation
