@@ -25,7 +25,8 @@ jobs:
 
       - uses: ./.github/actions/setup-project
 
-      - uses: ./.github/actions/setup-database
+      - id: database-setup
+        uses: ./.github/actions/setup-database
 
       - name: Run rspec
         env:
