@@ -28,4 +28,6 @@ jobs:
       - uses: ./.github/actions/setup-database
 
       - name: Run rspec
+        env:
+          DATABASE_URL: ${{ steps.database-setup.inputs.database_url }}
         run: bundle exec rspec
