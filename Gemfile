@@ -28,6 +28,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem "rspec-rails", "~> 5.0"
   gem "brakeman", "~> 5.1"
+  gem "bundler-audit"
 end
 
 group :development do

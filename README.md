@@ -33,9 +33,13 @@ Run the following commands to install dependencies:
 
 ### Running Tests
 
-#### Unit Tests
+Running tests and static scans:
+* Unit and system tests: `bundle exec rake spec`
+* Ruby static security scan: `bundle exec rake brakeman`
+* Ruby dependency checks: `bundle exec rake bundler:audit`
+* JS dependency checks: `bundle exec rake yarn:audit`
 
-`bundle exec rake spec`
+Run all of the above: `bundle exec rake`
 
 #### Pa11y Accessibility Scan
 
