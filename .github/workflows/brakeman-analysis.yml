@@ -29,7 +29,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: ./.github/actions/setup-project
+    - uses: ./.github/actions/setup-languages
 
     # Execute Brakeman CLI and generate a SARIF output with the security issues identified during the analysis
     - name: Scan

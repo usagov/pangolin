@@ -23,11 +23,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: ./.github/actions/setup-project
-
-      - uses: ./.github/actions/setup-database
+      - id: setup
+        uses: ./.github/actions/setup-project
 
       - uses: ./.github/actions/run-server
+        with:
+          database_url: ${{ steps.setup.outputs.database_url }}
 
       # this is needed again because run-server removes devDependencies during asset compilation
       - name: Install yarn dependencies
