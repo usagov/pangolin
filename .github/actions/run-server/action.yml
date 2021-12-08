@@ -7,8 +7,7 @@ inputs:
     default: ci
   database_url:
     description: DATABASE_URL to set
-    required: false
-    default: postgres://pangolin:postgres@localhost:5432/pangolin_test
+    required: true
 runs:
   using: "composite"
   steps:

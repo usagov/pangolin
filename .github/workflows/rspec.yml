@@ -23,12 +23,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: ./.github/actions/setup-project
-
-      - id: database-setup
-        uses: ./.github/actions/setup-database
+      - id: setup
+        uses: ./.github/actions/setup-project
 
       - name: Run rspec
         env:
-          DATABASE_URL: ${{ steps.database-setup.outputs.database_url }}
+          DATABASE_URL: ${{ steps.setup.outputs.database_url }}
         run: bundle exec rspec
