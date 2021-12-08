@@ -31,7 +31,8 @@ $@
 exit_status=$?
 
 
-# shut down the server
+# shut down the server and cleanup after ourselves
+bundle exec rake assets:clobber
 kill $server_pid
 
 exit $exit_status
