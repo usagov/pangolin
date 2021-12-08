@@ -163,6 +163,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    secure_headers (6.3.3)
     semantic_range (3.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -207,6 +208,7 @@ DEPENDENCIES
   rails (~> 6.1.4, >= 6.1.4.1)
   rspec-rails (~> 5.0)
   sass-rails (>= 6)
+  secure_headers (~> 6.3)
   tzinfo-data
   web-console (>= 4.1.0)
   webpacker (~> 5.0)
