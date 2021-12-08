@@ -13,4 +13,4 @@ hostname="http://host.docker.internal:3000"
 args="-c zap.conf -I -r zap_report.html"
 cmd="docker run --rm --user root -v $(pwd):/zap/wrk/:rw -t $docker_name zap-full-scan.py -t $hostname $args"
 
-`dirname $0`/with-server "$cmd"
+`dirname "$0"`/with-server "$cmd"
