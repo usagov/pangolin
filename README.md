@@ -41,6 +41,10 @@ Run the following commands to install dependencies:
 
 `./bin/pa11y-scan`
 
+#### OWASP ZAP Dynamic Security Scan
+
+`./bin/owasp-scan`
+
 ### Running the Server
 
 `bundle exec rails server` will start a server listening on port `3000`
