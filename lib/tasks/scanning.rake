@@ -1,5 +1,3 @@
-require 'bundler/audit/cli'
-
 desc "Run brakeman with potential non-0 return code"
 task :brakeman do
   # -z flag makes it return non-0 if there are any warnings
@@ -10,11 +8,17 @@ task :brakeman do
 end
 
 namespace :bundler do
-  desc 'Updates the ruby-advisory-db and runs audit'
-  task :audit do
-    %w(update check).each do |command|
-      Bundler::Audit::CLI.start [command]
+  begin
+    require 'bundler/audit/cli'
+
+    desc 'Updates the ruby-advisory-db and runs audit'
+    task :audit do
+      %w(update check).each do |command|
+        Bundler::Audit::CLI.start [command]
+      end
     end
+  rescue LoadError
+    # no-op, probably in a production environment
   end
 end
 
