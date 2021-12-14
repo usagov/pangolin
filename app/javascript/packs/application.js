@@ -7,9 +7,11 @@ import Rails from "@rails/ujs"
 
 Rails.start()
 
-import 'uswds/src/stylesheets/uswds.scss'
+import 'css/application.scss'
 import 'uswds/dist/img/icon-dot-gov.svg'
 import 'uswds/dist/img/us_flag_small.png'
 import 'uswds/dist/img/icon-https.svg'
 
-require('uswds')
+document.addEventListener("DOMContentLoaded", () => {
+  require('uswds')
+})
