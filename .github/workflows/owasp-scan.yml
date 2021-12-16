@@ -10,8 +10,8 @@ on:
     branches: [ main ]
   schedule:
     # cron format: 'minute hour dayofmonth month dayofweek'
-    # this will run at noon UTC every day (7am EST / 8am EDT)
-    - cron: '0 12 * * *'
+    # this will run at noon UTC every Monday (7am EST / 8am EDT)
+    - cron: '0 12 * * 1'
 
 jobs:
   owasp-scan:
