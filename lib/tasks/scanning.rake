@@ -35,6 +35,7 @@ namespace :yarn do
       elsif all_issues_ignored?(parsed)
         puts "Ignoring known and accepted yarn audit results"
       else
+        puts "Failed with exit code #{status.exitstatus}"
         exit status.exitstatus
       end
     end
@@ -42,18 +43,24 @@ namespace :yarn do
 end
 
 def all_issues_ignored?(issues)
-  summary = issues.find { |json| json["type"] == "auditSummary" }["data"]["vulnerabilities"]
-  # immediately fail if more findings are discovered, even if they have the same advisory ID,
-  # this helps to ensure that we fully evaluate the risk present
-  return false unless summary["moderate"] <= 5 && summary["high"] == 3 && summary["critical"] == 0
-  advisory_ids = issues.select { |json| json["type"] == "auditAdvisory" }.map { |json| json["data"]["advisory"]["id"] }
+  present_advisories_with_frequencies = Hash.new { |hash, key| hash[key] = 0 }
 
-  # add any ignored advisory IDs below with a comment as to why ignored
-  advisory_ids.all? { |id| [
-    1004946, # mod - inefficient regex in dev server and at build time
-    1005154, # high - inefficient regex in dev server and at build time
-    1004967, # mod - inefficient regex in dev server and at build time
-  ].include? id }
+  # Only look at audit advisories, and not audit summaries
+  issues.select{|issue_json| issue_json['type'] == 'auditAdvisory'}.each do |issue_json|
+    present_advisories_with_frequencies[issue_json['data']['advisory']['id']] += 1
+  end
+
+  # Advisory ID to be ignored with number of times it appears in project dependencies
+  # And, a comment as to why we're ignoring
+  ignored_advisories_with_frequencies = {
+    1004946 => 4, # mod - inefficient regex in dev server and at build time
+    1005154 => 3, # high - inefficient regex in dev server and at build time
+    1004967 => 1, # mod - inefficient regex in dev server and at build time
+  }
+
+  pp "Present advisories: #{present_advisories_with_frequencies}"
+  pp "Ignored advisories: #{ignored_advisories_with_frequencies}"
+  present_advisories_with_frequencies == ignored_advisories_with_frequencies
 end
 
 task default: ["brakeman", "bundler:audit", "yarn:audit"]
