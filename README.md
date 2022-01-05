@@ -16,8 +16,8 @@ Development
 
 The following prerequisites must be installed
 
-* Ruby 3.0.2
-* Node 14.18.1
+* Ruby 3.0.3
+* Node 14.18.2
 * PostgreSQL 12+
 
 #### Dependency Install
